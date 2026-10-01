@@ -59,7 +59,16 @@ Instagram (official API or data export)
    ```
    (For the Facebook Login flow, pass `--base-url https://graph.facebook.com/v23.0 --user-id <IG_USER_ID>`.)
 
-Both options write `data/raw/posts.jsonl`: one line per post with its caption and downloaded slide images.
+**Option C: screenshots shared with the admin's permission**
+1. Make one folder per post and save its slides in swipe order:
+   `data/screenshots/post_001/01.png, 02.png, ...` (or flat files: `post001_01.png, post001_02.png`).
+   Crop to the slide if you can. The OCR prompt ignores Instagram's interface either way.
+2. Run:
+   ```bash
+   python -m confession_llm.ingest_screenshots --dir data/screenshots --out data/raw
+   ```
+
+All options write `data/raw/posts.jsonl`: one line per post with its caption and downloaded slide images.
 
 ## Step 2: set up a GPU machine
 

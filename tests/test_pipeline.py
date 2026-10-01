@@ -77,3 +77,16 @@ def test_laya_decide():
     assert decide(good, 0.6, 0.3, 1.0) == (True, "ok")
     assert decide(good | {"identifies_real_person": {"noul": 0.8}}, 0.6, 0.3, 1.0)[0] is False
     assert decide(good | {"engagement": {"score": 0.4}}, 0.6, 0.3, 1.0) == (False, "low engagement")
+
+
+def test_group_screenshots_folders_and_flat(tmp_path):
+    from confession_llm.ingest_screenshots import group_screenshots
+
+    for name in ["post_2/10.png", "post_2/2.png", "post_10/1.jpg", "post001_02.png", "post001_1.png", "notes.txt"]:
+        p = tmp_path / name
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(b"x")
+    groups = group_screenshots(tmp_path)
+    assert set(groups) == {"post_2", "post_10", "post001"}
+    assert [p.name for p in groups["post_2"]] == ["2.png", "10.png"]  # natural sort, not lexical
+    assert [p.name for p in groups["post001"]] == ["post001_1.png", "post001_02.png"]

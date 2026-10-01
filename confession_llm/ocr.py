@@ -16,9 +16,12 @@ import json
 from pathlib import Path
 
 OCR_PROMPT = (
-    "Transcribe ALL text visible in this image exactly as written, preserving line breaks "
-    "and the original language/script. Do not summarize, translate or add commentary. "
-    "If the image contains no text, reply with NONE."
+    "This is an Instagram confession post slide (possibly a phone/browser screenshot). "
+    "Transcribe ONLY the confession text written on the slide itself, exactly as written, "
+    "preserving line breaks and the original language/script. Ignore Instagram interface "
+    "elements: usernames, profile names, like/comment counts, captions below the image, "
+    "comments, timestamps, buttons, status bar and page indicators. Do not summarize, "
+    "translate or add commentary. If the slide has no confession text, reply with NONE."
 )
 
 
