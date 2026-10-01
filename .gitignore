@@ -1,0 +1,8 @@
+# Never commit scraped/exported content or model weights
+data/*
+!data/.gitkeep
+outputs/
+*.safetensors
+__pycache__/
+.venv/
+.env
